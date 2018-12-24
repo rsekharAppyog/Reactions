@@ -159,10 +159,11 @@ public final class ReactionButton: UIReactionControl {
   }
 
   private var isLongPressMoved = false
-
+  private var lastTouchedYPosition : CGFloat = 0
+    
   @objc func longPressAction(_ gestureRecognizer: UILongPressGestureRecognizer) {
     guard let selector = reactionSelector, selector.reactions.count > 1 else { return }
-
+    self.lastTouchedYPosition = gestureRecognizer.location(in: self).y
     if gestureRecognizer.state == .began {
       isLongPressMoved = false
 
@@ -236,7 +237,7 @@ public final class ReactionButton: UIReactionControl {
 
     overlay.frame = CGRect(x:0 , y: 0, width: window.bounds.width, height: window.bounds.height * 2)
 
-    let centerPoint = convert(CGPoint(x: bounds.midX, y: 0), to: nil)
+    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition), to: nil)
     selector.frame  = selector.boundsToFit()
 
     switch config.alignment {
