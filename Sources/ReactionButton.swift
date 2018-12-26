@@ -144,10 +144,11 @@ public final class ReactionButton: UIReactionControl {
   // MARK: - Responding to Gesture Events
 
   @objc func tapAction(_ gestureRecognizer: UITapGestureRecognizer) {
+    /*
     isSelected = !isSelected
 
     if isSelected {
-      /*
+      
       UIView.animateKeyframes(withDuration: 0.3, delay: 0, options: .calculationModeCubic, animations: { [weak self] in
         UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
           self?.iconImageView.transform = CGAffineTransform(scaleX: 1.8, y: 1.8)
@@ -155,16 +156,16 @@ public final class ReactionButton: UIReactionControl {
         UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
           self?.iconImageView.transform = .identity
         })
-        }, completion: nil) */
+        }, completion: nil)
     }
 
-    sendActions(for: .touchUpInside)
+    sendActions(for: .touchUpInside) */
   }
 
   private var isLongPressMoved = false
   private var lastTouchedYPosition : CGFloat = 0
     
-  @objc func longPressAction(_ gestureRecognizer: UILongPressGestureRecognizer) {
+  @objc public func longPressAction(_ gestureRecognizer: UILongPressGestureRecognizer) {
     guard let selector = reactionSelector, selector.reactions.count > 1 else { return }
     self.lastTouchedYPosition = gestureRecognizer.location(in: self).y
     if gestureRecognizer.state == .began {
@@ -240,7 +241,7 @@ public final class ReactionButton: UIReactionControl {
 
     overlay.frame = CGRect(x:0 , y: 0, width: window.bounds.width, height: window.bounds.height * 2)
 
-    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition), to: nil)
+    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition - 40), to: nil)
     selector.frame  = selector.boundsToFit()
 
     switch config.alignment {
