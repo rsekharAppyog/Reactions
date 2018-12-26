@@ -80,7 +80,7 @@ public final class ReactionButton: UIReactionControl {
 
   override func setup() {
     addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ReactionButton.tapAction)))
-    addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(ReactionButton.longPressAction)))
+   // addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(ReactionButton.longPressAction)))
 
    // addSubview(iconImageView)
    // addSubview(titleLabel)
@@ -241,7 +241,7 @@ public final class ReactionButton: UIReactionControl {
 
     overlay.frame = CGRect(x:0 , y: 0, width: window.bounds.width, height: window.bounds.height * 2)
 
-    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition - 40), to: nil)
+    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition - 20), to: nil)
     selector.frame  = selector.boundsToFit()
 
     switch config.alignment {
