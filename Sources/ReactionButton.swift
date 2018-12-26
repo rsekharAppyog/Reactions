@@ -38,7 +38,7 @@ public final class ReactionButton: UIReactionControl {
  // private let titleLabel: UILabel        = Components.reactionButton.facebookLikeLabel()
   private lazy var overlay: UIView       = UIView().build {
     $0.clipsToBounds   = false
-    $0.backgroundColor = .clear
+    $0.backgroundColor = UIColor.black.withAlphaComponent(0.32)
     $0.alpha           = 0
 
     $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ReactionButton.dismissReactionSelector)))
