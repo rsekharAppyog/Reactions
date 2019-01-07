@@ -166,7 +166,7 @@ public final class ReactionButton: UIReactionControl {
   private var lastTouchedYPosition : CGFloat = 0
     
   @objc public func longPressAction(_ gestureRecognizer: UILongPressGestureRecognizer) {
-    guard let selector = reactionSelector, selector.reactions.count > 1 else { return }
+    guard let selector = reactionSelector, selector.reactions.count > 0 else { return }
     self.lastTouchedYPosition = gestureRecognizer.location(in: self).y
     if gestureRecognizer.state == .began {
       isLongPressMoved = false
@@ -233,7 +233,7 @@ public final class ReactionButton: UIReactionControl {
   }
 
   private func displayReactionSelector(feedback: ReactionFeedback) {
-    guard let selector = reactionSelector, let window = UIApplication.shared.keyWindow, selector.reactions.count > 1 else { return }
+    guard let selector = reactionSelector, let window = UIApplication.shared.keyWindow, selector.reactions.count > 0 else { return }
 
     if overlay.superview == nil {
       UIApplication.shared.keyWindow?.addSubview(overlay)
