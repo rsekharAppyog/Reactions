@@ -183,7 +183,7 @@ public final class ReactionButton: UIReactionControl {
       if isLongPressMoved {
         selector.longPressAction(gestureRecognizer)
 
-        dismissReactionSelector()
+       // dismissReactionSelector() To prevent dismissing
       }
       else {
         selector.feedback = .tapToSelectAReaction
