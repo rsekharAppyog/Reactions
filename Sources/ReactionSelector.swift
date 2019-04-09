@@ -231,7 +231,7 @@ public final class ReactionSelector: UIReactionControl {
   // MARK: - Locating Points
 
   private func isPointInsideExtendedBounds(_ location: CGPoint) -> Bool {
-    return CGRect(x: bounds.origin.x, y: -bounds.height, width: bounds.width, height: bounds.height * 3).contains(location)
+    return CGRect(x: bounds.origin.x, y: -bounds.height, width: bounds.width, height: bounds.height * 1).contains(location)
   }
 
   private func optionIndexFromPoint(_ location: CGPoint) -> Int? {
