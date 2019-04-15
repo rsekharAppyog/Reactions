@@ -203,13 +203,13 @@ public final class ReactionButton: UIReactionControl {
 
     if isReactionChanged {
       sendActions(for: .valueChanged)
+      dismissReactionSelector()
     }
-
-    dismissReactionSelector()
+    //  dismissReactionSelector()
   }
 
   @objc func reactionSelectorTouchedUpOutsideAction(_ sender: ReactionSelector) {
-    dismissReactionSelector()
+    //dismissReactionSelector()
   }
 
   // MARK: - Presenting Reaction Selectors
@@ -241,7 +241,7 @@ public final class ReactionButton: UIReactionControl {
 
     overlay.frame = CGRect(x:0 , y: 0, width: window.bounds.width, height: window.bounds.height * 2)
 
-    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition - 20), to: nil)
+    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition - 30), to: nil)
     selector.frame  = selector.boundsToFit()
 
     switch config.alignment {
