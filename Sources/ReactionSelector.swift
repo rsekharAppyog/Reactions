@@ -78,7 +78,11 @@ public final class ReactionSelector: UIReactionControl {
   /**
    The reaction selector configuration.
    */
-  public var config = ReactionSelectorConfig()
+    public var config = ReactionSelectorConfig() {
+        didSet {
+            backgroundLayer.fillColor = config.backgroundColor.cgColor
+        }
+    }
 
   // MARK: - Managing Internal State
 
@@ -111,6 +115,8 @@ public final class ReactionSelector: UIReactionControl {
     reactionIconLayers = reactions.map { Components.reactionSelect.reactionIcon(option: $0) }
     reactionLabels     = reactions.map { Components.reactionSelect.reactionLabel(option: $0, height: config.spacing * 4) }
 
+    backgroundLayer.fillColor = config.backgroundColor.cgColor
+    
     if backgroundLayer.superlayer == nil {
       addGestureRecognizer(UILongPressGestureRecognizer().build {
         $0.addTarget(self, action: #selector(ReactionSelector.longPressAction))

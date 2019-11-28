@@ -45,6 +45,11 @@ public final class ReactionSelectorConfig: Configurable {
   /// Boolean value to know whether the reactions needs to be sticked when they are selected.
   public var stickyReaction: Bool = false
 
+    /**
+        Background color for the reactions view
+     */
+    public var backgroundColor : UIColor = .white
+    
   // MARK: - Initializing a Reaction Selector
 
   // Initialize a configurable with default values.
