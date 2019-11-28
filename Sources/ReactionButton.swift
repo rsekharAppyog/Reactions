@@ -229,7 +229,8 @@ public final class ReactionButton: UIReactionControl {
   @objc public func dismissReactionSelector() {
     reactionSelector?.feedback = nil
 
-    animateOverlay(alpha: 0, center: CGPoint(x: overlay.bounds.midX, y: overlay.bounds.midY))
+    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition), to: nil)
+    animateOverlay(alpha: 0, center: centerPoint)
   }
 
   private func displayReactionSelector(feedback: ReactionFeedback) {
@@ -239,11 +240,18 @@ public final class ReactionButton: UIReactionControl {
       UIApplication.shared.keyWindow?.addSubview(overlay)
     }
 
-    overlay.frame = CGRect(x:0 , y: 0, width: window.bounds.width, height: window.bounds.height * 2)
-
-    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition - 30), to: nil)
-    selector.frame  = selector.boundsToFit()
-
+    overlay.frame = CGRect(x:0 , y: 0, width: window.bounds.width, height: window.bounds.height)
+    let selectorFrame = selector.boundsToFit()
+    var movePoint = selectorFrame.height + 30
+    
+    let centerPoint = convert(CGPoint(x: bounds.midX, y: lastTouchedYPosition), to: nil)
+    
+    if centerPoint.y - (selectorFrame.height / 2) - 30 < selectorFrame.height {
+        movePoint = -(selectorFrame.height + 30)
+    }
+    
+    selector.frame  = selectorFrame
+    
     switch config.alignment {
     case .left:
       selector.center = CGPoint(x: centerPoint.x + (selector.bounds.width - bounds.width) / 2, y: centerPoint.y)
@@ -262,7 +270,7 @@ public final class ReactionButton: UIReactionControl {
 
     selector.feedback = feedback
 
-    animateOverlay(alpha: 1, center: CGPoint(x: overlay.bounds.midX, y: overlay.bounds.midY - selector.bounds.height))
+    animateOverlay(alpha: 1, center: CGPoint(x: centerPoint.x, y: centerPoint.y - movePoint))
   }
 
   private func animateOverlay(alpha: CGFloat, center: CGPoint) {
@@ -270,7 +278,7 @@ public final class ReactionButton: UIReactionControl {
       guard let overlay = self?.overlay else { return }
       
       overlay.alpha  = alpha
-      overlay.center = center
+      self?.reactionSelector?.center = center
     }
   }
 }
